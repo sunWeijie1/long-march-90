@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>征途如虹 · 纪念红军长征胜利90周年</title>
+<style>
+:root{
+  --red:#b31d23;
+  --red-deep:#7a1418;
+  --gold:#c9a24b;
+  --gold-light:#e8cf8a;
+  --ink:#1c1a17;
+  --paper:#f6f1e7;
+  --paper-2:#efe7d8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+/* ===== 顶部导航 ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 6vw;
+  background:rgba(28,26,23,.0);
+  transition:background .4s,box-shadow .4s;
+}
+.nav.scrolled{
+  background:rgba(28,26,23,.95);
+  box-shadow:0 4px 24px rgba(0,0,0,.3);
+}
+.nav .logo{
+  font-size:20px;letter-spacing:6px;color:#fff;font-weight:700;
+  display:flex;align-items:center;gap:10px;
+}
+.nav .logo .seal{
+  width:30px;height:30px;border:2px solid var(--gold);
+  color:var(--gold);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;letter-spacing:0;line-height:1;
+}
+.nav ul{display:flex;gap:34px;list-style:none;}
+.nav ul a{color:rgba(255,255,255,.82);font-size:14px;letter-spacing:2px;transition:color .3s;}
+.nav ul a:hover{color:var(--gold-light);}
+.nav .menu-btn{display:none;color:#fff;font-size:26px;background:none;border:none;cursor:pointer;}
+
+/* ===== Hero ===== */
+.hero{
+  min-height:100vh;
+  background:
+    radial-gradient(120% 120% at 50% -10%,rgba(201,162,75,.18),transparent 60%),
+    linear-gradient(180deg,#2a0d0e 0%,#7a1418 55%,#4a0c10 100%);
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 80px);
+}
+/* 群山剪影 */
+.mountains{position:absolute;left:0;right:0;bottom:0;height:42vh;}
+.mountains svg{width:100%;height:100%;display:block;}
+.hero-inner{position:relative;z-index:2;padding:0 24px;color:#fff;}
+.hero .tag{
+  display:inline-block;letter-spacing:8px;font-size:13px;
+  color:var(--gold-light);border:1px solid rgba(201,162,75,.6);
+  padding:6px 20px;border-radius:30px;margin-bottom:28px;
+}
+.hero h1{
+  font-size:clamp(40px,8vw,84px);font-weight:900;letter-spacing:12px;
+  line-height:1.15;text-shadow:0 6px 30px rgba(0,0,0,.5);
+}
+.hero h1 .em{background:linear-gradient(120deg,var(--gold-light),#f5e3b0 55%,var(--gold));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{margin-top:22px;font-size:clamp(15px,2.4vw,19px);letter-spacing:4px;color:rgba(255,255,255,.85);}
+.hero .year{
+  margin-top:40px;font-size:clamp(28px,5vw,48px);font-weight:800;
+  letter-spacing:6px;color:var(--gold-light);
+  font-family:"DIN Alternate","PingFang SC",sans-serif;
+}
+.hero .scroll-hint{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.6);font-size:12px;letter-spacing:3px;z-index:2;
+}
+.hero .scroll-hint span{display:block;width:1px;height:38px;margin:8px auto 0;
+  background:linear-gradient(rgba(255,255,255,.6),transparent);}
+
+/* ===== 通用区块 ===== */
+section{padding:96px 6vw;}
+.sec-head{text-align:center;margin-bottom:56px;}
+.sec-head .kicker{font-size:13px;letter-spacing:6px;color:var(--red);font-weight:700;}
+.sec-head h2{
+  font-size:clamp(28px,4.5vw,44px);margin-top:10px;letter-spacing:4px;font-weight:900;
+}
+.sec-head .line{width:60px;height:3px;background:var(--gold);margin:18px auto 0;}
+.sec-head p{color:#6b6355;margin-top:14px;font-size:15px;letter-spacing:1px;}
+
+/* ===== 数字时间轴 ===== */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:rgba(179,29,35,.2);border:1px solid rgba(179,29,35,.2);
+  border-radius:14px;overflow:hidden;max-width:1000px;margin:0 auto;
+}
+.stat{background:var(--paper);padding:38px 16px;text-align:center;}
+.stat .n{font-size:clamp(30px,5vw,52px);font-weight:900;color:var(--red-deep);
+  font-family:"DIN Alternate",sans-serif;line-height:1;}
+.stat .n small{font-size:.45em;margin-left:3px;}
+.stat .l{margin-top:12px;font-size:14px;letter-spacing:2px;color:#5c5448;}
+
+/* ===== 征程路线（时间轴） ===== */
+.trail{position:relative;max-width:940px;margin:0 auto;padding-left:40px;}
+.trail::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(var(--red),var(--gold));}
+.trail .node{position:relative;padding:0 0 44px 8px;}
+.trail .node:last-child{padding-bottom:0;}
+.trail .dot{position:absolute;left:-40px;top:6px;width:24px;height:24px;border-radius:50%;
+  background:var(--paper);border:3px solid var(--red);box-shadow:0 0 0 5px var(--paper);}
+.trail .dot.gold{border-color:var(--gold);}
+.trail .when{font-family:"DIN Alternate",sans-serif;color:var(--red);font-weight:800;
+  letter-spacing:2px;font-size:15px;}
+.trail h3{font-size:21px;margin:4px 0 8px;letter-spacing:1px;}
+.trail p{color:#5c5448;font-size:15px;}
+.trail .card{
+  margin-top:12px;background:#fff;border-left:4px solid var(--gold);
+  padding:14px 18px;border-radius:0 10px 10px 0;box-shadow:0 6px 20px rgba(0,0,0,.05);
+}
+
+/* ===== 精神内涵 ===== */
+.spirit{background:linear-gradient(180deg,var(--paper-2),var(--paper));}
+.spirit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1080px;margin:0 auto;}
+.sp{background:#fff;border-radius:14px;padding:32px 26px;position:relative;overflow:hidden;
+  box-shadow:0 10px 30px rgba(122,20,24,.08);transition:transform .35s;}
+.sp:hover{transform:translateY(-8px);}
+.sp .idx{font-family:"DIN Alternate",sans-serif;font-size:56px;font-weight:900;
+  color:rgba(179,29,35,.12);position:absolute;right:16px;top:-6px;line-height:1;}
+.sp h4{font-size:19px;letter-spacing:2px;margin-bottom:10px;position:relative;}
+.sp h4::before{content:"";display:inline-block;width:14px;height:14px;
+  background:var(--red);border-radius:2px;margin-right:10px;vertical-align:middle;}
+.sp p{color:#5c5448;font-size:14.5px;}
+
+/* ===== 历史影像墙 ===== */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto;}
+.gal{aspect-ratio:4/3;border-radius:12px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#8a1f24,#c9a24b);
+  display:flex;align-items:center;justify-content:center;}
+.gal .art{font-size:clamp(34px,6vw,60px);opacity:.9;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));}
+.gal .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,.72));
+  color:#fff;font-size:13.5px;letter-spacing:1px;}
+
+/* ===== quote ===== */
+.quote{
+  background:linear-gradient(135deg,var(--red-deep),#4a0c10);
+  color:#fff;text-align:center;padding:88px 6vw;
+}
+.quote blockquote{font-size:clamp(22px,3.6vw,34px);letter-spacing:3px;line-height:1.7;
+  max-width:820px;margin:0 auto;font-weight:700;}
+.quote blockquote .q{color:var(--gold-light);font-size:1.4em;vertical-align:-6px;margin:0 6px;}
+.quote .who{margin-top:26px;letter-spacing:4px;color:var(--gold-light);font-size:14px;}
+
+/* ===== 传承寄语 ===== */
+.voice{max-width:760px;margin:0 auto;text-align:center;}
+.voice .big{font-size:clamp(18px,2.8vw,24px);letter-spacing:2px;line-height:2;}
+.voice .sign{margin-top:28px;color:var(--red);font-weight:700;letter-spacing:3px;}
+.btn{
+  display:inline-block;margin-top:34px;padding:14px 40px;border:1.5px solid var(--red);
+  color:var(--red);border-radius:40px;letter-spacing:4px;font-size:14px;transition:.3s;
+}
+.btn:hover{background:var(--red);color:#fff;}
+
+/* ===== 页脚 ===== */
+footer{background:#16140f;color:rgba(255,255,255,.66);padding:54px 6vw 30px;text-align:center;}
+footer .seal-big{width:64px;height:64px;border:2px solid var(--gold);color:var(--gold);
+  border-radius:8px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;letter-spacing:0;font-weight:700;}
+footer .f-t{color:#fff;letter-spacing:8px;font-size:16px;margin-bottom:12px;}
+footer .f-sub{font-size:13px;letter-spacing:2px;}
+footer .copy{margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:12px;letter-spacing:1px;}
+
+/* ===== 滚动入场动画 ===== */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s;}
+.reveal.in{opacity:1;transform:none;}
+
+@media(max-width:820px){
+  .nav ul{display:none;}
+  .nav .menu-btn{display:block;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .spirit-grid,.gallery{grid-template-columns:1fr;}
+  section{padding:68px 6vw;}
+}
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="nav" id="nav">
+  <div class="logo"><span class="seal">长征</span>征途如虹</div>
+  <ul>
+    <li><a href="#hero">序章</a></li>
+    <li><a href="#facts">数字长征</a></li>
+    <li><a href="#trail">伟大征程</a></li>
+    <li><a href="#spirit">长征精神</a></li>
+    <li><a href="#gallery">历史回响</a></li>
+    <li><a href="#voice">薪火相传</a></li>
+  </ul>
+  <button class="menu-btn" onclick="document.querySelector('.nav ul').style.display=
+    document.querySelector('.nav ul').style.display==='flex'?'none':'flex'">☰</button>
+</nav>
+
+<!-- Hero -->
+<header class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="tag">纪念红军长征胜利 90 周年</div>
+    <h1>征途如虹<br><span class="em">信念照亮万水千山</span></h1>
+    <div class="sub">一九三六 · 一九三六 —— 二〇二六 · 二〇二六</div>
+    <div class="year">1936 — 2026 · 90 载</div>
+  </div>
+  <div class="mountains">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+      <path d="M0,400 L0,260 L180,160 L360,240 L520,120 L720,210 L900,130 L1100,230 L1280,150 L1440,240 L1440,400 Z"
+        fill="rgba(20,8,9,.75)"/>
+      <path d="M0,400 L0,320 L220,250 L440,300 L680,200 L880,280 L1080,210 L1300,290 L1440,240 L1440,400 Z"
+        fill="rgba(10,4,5,.9)"/>
+    </svg>
+  </div>
+  <div class="scroll-hint">向下滑动<span></span></div>
+</header>
+
+<!-- 数字长征 -->
+<section id="facts">
+  <div class="sec-head reveal">
+    <div class="kicker">NUMBERS · 数字里的征途</div>
+    <h2>二万五千里，一步一个史诗</h2>
+    <div class="line"></div>
+    <p>用最朴素的数字，读懂这场人类历史上的伟大壮举</p>
+  </div>
+  <div class="stats">
+    <div class="stat reveal"><div class="n">25<small>000</small></div><div class="l">行程里数（约）</div></div>
+    <div class="stat reveal"><div class="n">74<small>0</small></div><div class="l">日均行军（里）</div></div>
+    <div class="stat reveal"><div class="n">15<small>省</small></div><div class="l">途经省份</div></div>
+    <div class="stat reveal"><div class="n">24<small>次</small></div><div class="l">重要战役战斗</div></div>
+  </div>
+</section>
+
+<!-- 征程路线 -->
+<section id="trail" style="background:var(--paper-2);">
+  <div class="sec-head reveal">
+    <div class="kicker">ROUTE · 伟大征程</div>
+    <h2>从瑞金出发，到会宁会师</h2>
+    <div class="line"></div>
+  </div>
+  <div class="trail">
+    <div class="node reveal">
+      <div class="dot"></div>
+      <div class="when">1934 · 10</div>
+      <h3>瑞金 · 战略转移启程</h3>
+      <p>中央红军自江西瑞金、于都等地出发，踏上漫漫征途，开始了人类历史上前所未有的战略大转移。</p>
+    </div>
+    <div class="node reveal">
+      <div class="dot"></div>
+      <div class="when">1935 · 01</div>
+      <h3>遵义 · 伟大转折</h3>
+      <div class="card">遵义会议确立了毛泽东同志在党中央和红军的领导地位，在最危急关头挽救了党、挽救了红军、挽救了中国革命。</div>
+    </div>
+    <div class="node reveal">
+      <div class="dot gold"></div>
+      <div class="when">1935 · 05</div>
+      <h3>大渡河 · 飞夺泸定桥</h3>
+      <p>二十二名勇士冒着枪林弹雨攀爬铁索，打通了北上通道，书写了惊心动魄的英雄篇章。</p>
+    </div>
+    <div class="node reveal">
+      <div class="dot"></div>
+      <div class="when">1935 · 06</div>
+      <h3>夹金山 · 翻越雪山</h3>
+      <p>海拔四千米以上的皑皑雪山，缺衣少食的红军以钢铁意志翻越天险，把脚印留在了云之上。</p>
+    </div>
+    <div class="node reveal">
+      <div class="dot"></div>
+      <div class="when">1935 · 08</div>
+      <h3>松潘草地 · 穿越沼泽</h3>
+      <p>茫茫水草地，泥潭、饥饿、严寒步步相逼。战友相互搀扶，以信念为路，走出生命的绝境。</p>
+    </div>
+    <div class="node reveal">
+      <div class="dot gold"></div>
+      <div class="when">1936 · 10</div>
+      <h3>会宁 · 三大主力会师</h3>
+      <div class="card">红一、二、四方面军在甘肃会宁、将台堡会师，标志着长征的伟大胜利，中国革命由此翻开新的篇章。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 长征精神 -->
+<section id="spirit" class="spirit">
+  <div class="sec-head reveal">
+    <div class="kicker">SPIRIT · 长征精神</div>
+    <h2>把不可能，走成可能</h2>
+    <div class="line"></div>
+    <p>伟大长征精神，是永不熄灭的精神火炬</p>
+  </div>
+  <div class="spirit-grid">
+    <div class="sp reveal"><div class="idx">01</div>
+      <h4>坚定信念 矢志不渝</h4>
+      <p>革命理想高于天。无论前路多么艰险，对马克思主义的信仰、对革命必胜的信念，始终是照亮征途的灯火。</p>
+    </div>
+    <div class="sp reveal"><div class="idx">02</div>
+      <h4>实事求是 独立自主</h4>
+      <p>从中国革命实际出发，敢于坚持真理、修正错误，走出了一条属于中国自己的道路。</p>
+    </div>
+    <div class="sp reveal"><div class="idx">03</div>
+      <h4>顾全大局 严守纪律</h4>
+      <p>万众一心、团结如钢，个人利益服从革命利益，铁的纪律铸就无坚不摧的队伍。</p>
+    </div>
+    <div class="sp reveal"><div class="idx">04</div>
+      <h4>紧紧依靠 心系人民</h4>
+      <p>红军是人民的军队，一路播撒火种、为民除害，赢得了最广大人民群众的衷心拥护。</p>
+    </div>
+    <div class="sp reveal"><div class="idx">05</div>
+      <h4>艰苦奋斗 百折不挠</h4>
+      <p>雪山草地压不垮，围追堵截挡不住，用血肉之躯把绝境踏成通途。</p>
+    </div>
+    <div class="sp reveal"><div class="idx">06</div>
+      <h4>勇往直前 敢于胜利</h4>
+      <p>没有闯不过的关，没有打不赢的仗。敢叫日月换新天的气魄，正是民族不屈的脊梁。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 历史回响（影像墙，纯CSS插画风） -->
+<section id="gallery">
+  <div class="sec-head reveal">
+    <div class="kicker">ECHO · 历史回响</div>
+    <h2>山河为证，岁月如歌</h2>
+    <div class="line"></div>
+  </div>
+  <div class="gallery">
+    <div class="gal reveal"><span class="art">⛰️</span><div class="cap">雪山草地 · 钢铁意志</div></div>
+    <div class="gal reveal"><span class="art">🌉</span><div class="cap">泸定铁索 · 勇者无畏</div></div>
+    <div class="gal reveal"><span class="art">🚩</span><div class="cap">遵义会议 · 伟大转折</div></div>
+    <div class="gal reveal"><span class="art">🏞️</span><div class="cap">赤水奇兵 · 用兵如神</div></div>
+    <div class="gal reveal"><span class="art">🤝</span><div class="cap">军民同心 · 鱼水情深</div></div>
+    <div class="gal reveal"><span class="art">🎇</span><div class="cap">会宁会师 · 胜利曙光</div></div>
+  </div>
+</section>
+
+<!-- 引语 -->
+<section class="quote">
+  <blockquote class="reveal">
+    <span class="q">“</span>长征是宣言书，长征是宣传队，长征是播种机。<span class="q">”</span>
+  </blockquote>
+  <div class="who reveal">— 毛泽东《论反对日本帝国主义的策略》</div>
+</section>
+
+<!-- 薪火相传 -->
+<section id="voice">
+  <div class="sec-head reveal">
+    <div class="kicker">LEGACY · 薪火相传</div>
+    <h2>每一代人有每一代人的长征路</h2>
+    <div class="line"></div>
+  </div>
+  <div class="voice reveal">
+    <p class="big">九十载风雨如磐，那支队伍踏过的雪山草地，早已开满鲜花。<br>
+    而他们留下的，是一盏永不熄灭的灯——<br>
+    照亮我们翻越自己的“雪山”，趟过自己的“草地”。</p>
+    <div class="sign">走好新时代的长征路 · 你我都是接力者</div>
+    <a href="#hero" class="btn">回到序章 ↑</a>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer>
+  <div class="seal-big">九十</div>
+  <div class="f-t">征途如虹</div>
+  <div class="f-sub">纪念中国工农红军长征胜利 90 周年 · 1936 — 2026</div>
+  <div class="copy">本页为纪念主题网页演示，历史事件表述以官方权威文献为准。</div>
+</footer>
+
+<script>
+// 导航栏滚动态
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+// 滚动入场
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// 数字滚动动效
+const nObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target.querySelector('.n');
+    if(!el||el.dataset.done)return;
+    el.dataset.done='1';
+    const txt=el.textContent.trim();
+    const num=parseFloat(txt.replace(/[^\d.]/g,''));
+    const unit=txt.replace(/[\d.]/g,'');
+    if(isNaN(num))return;
+    let cur=0;const dur=1400;const t0=performance.now();
+    function step(t){
+      const p=Math.min((t-t0)/dur,1);
+      const ease=1-Math.pow(1-p,3);
+      el.innerHTML=(num*ease).toFixed(num%1?1:0)+unit;
+      if(p<1)requestAnimationFrame(step);
+      else el.innerHTML=txt;
+    }
+    requestAnimationFrame(step);
+  });
+},{threshold:.4});
+document.querySelectorAll('.stat').forEach(s=>nObs.observe(s));
+</script>
+</body>
+</html>
